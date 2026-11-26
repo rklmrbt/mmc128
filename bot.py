@@ -13,14 +13,15 @@ from aiogram.types import (
     FSInputFile,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    Message,
+        Message,
+    WebAppInfo,
 )
 
 import storage
 import weather
 
 logging.basicConfig(level=logging.INFO)
-
+RADIO_WEBAPP_URL = "https://rklmrbt.github.io/mmc128/radio.html"
 # Токен бота — получи у @BotFather в Telegram (или задай переменную окружения BOT_TOKEN)
 BOT_TOKEN = os.getenv("BOT_TOKEN", "ВСТАВЬ_СЮДА_СВОЙ_ТОКЕН")
 
@@ -66,7 +67,7 @@ TOPIC_LINKS = {
     "notes": "https://t.me/c/3991721169/7",
     # Временно — ссылка на ветку "Радио" в группе. Как только пришлёшь html-файл,
     # заменим эту кнопку на Web App, который откроется прямо внутри бота.
-    "radio": "https://t.me/c/3991721169/8",
+    
 }
 
 
@@ -82,7 +83,7 @@ def build_menu_keyboard() -> InlineKeyboardMarkup:
         ],
         [
             InlineKeyboardButton(text="📝 Заметки", url=TOPIC_LINKS["notes"]),
-            InlineKeyboardButton(text="📻 Радио", url=TOPIC_LINKS["radio"]),
+            InlineKeyboardButton(text="📻 Радио", web_app=WebAppInfo(url=RADIO_WEBAPP_URL)),
         ],
         [
             InlineKeyboardButton(text="☀️ Погода", callback_data="weather"),
